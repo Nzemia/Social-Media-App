@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  //caching in client side
   experimental: {
     staleTimes: {
       dynamic: 30,
