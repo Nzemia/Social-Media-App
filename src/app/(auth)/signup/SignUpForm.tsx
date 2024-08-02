@@ -4,11 +4,10 @@ import LoadingButton from "@/components/LoadingButton";
 import { PasswordInput } from "@/components/PasswordInput";
 import {
   Form,
-  FormControl,
-  FormField,
+  FormControl, FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { signUpSchema, SignUpValues } from "@/lib/validation";
@@ -52,6 +51,7 @@ export default function SignUpForm() {
               <FormControl>
                 <Input placeholder="Username" {...field} />
               </FormControl>
+
               <FormMessage />
             </FormItem>
           )}

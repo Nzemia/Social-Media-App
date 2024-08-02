@@ -36,7 +36,7 @@ export async function signUp(
 
     if (existingUsername) {
       return {
-        error: "Username already taken",
+        error: "Username already taken!",
       };
     }
 
@@ -51,26 +51,36 @@ export async function signUp(
 
     if (existingEmail) {
       return {
-        error: "Email already taken",
+        error: "Email already exists!",
       };
     }
 
-    await prisma.$transaction(async (tx) => {
-      await tx.user.create({
-        data: {
-          id: userId,
-          username,
-          displayName: username,
-          email,
-          passwordHash,
-        },
-      });
-      await streamServerClient.upsertUser({
+    await prisma.user.create({
+      data: {
         id: userId,
         username,
-        name: username,
-      });
+        displayName: username,
+        email,
+        passwordHash,
+      },
     });
+
+    // await prisma.$transaction(async (tx) => {
+    //   await tx.user.create({
+    //     data: {
+    //       id: userId,
+    //       username,
+    //       displayName: username,
+    //       email,
+    //       passwordHash,
+    //     },
+    //   });
+    //   await streamServerClient.upsertUser({
+    //     id: userId,
+    //     username,
+    //     name: username,
+    //   });
+    // });
 
     const session = await lucia.createSession(userId, {});
     const sessionCookie = lucia.createSessionCookie(session.id);

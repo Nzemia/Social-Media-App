@@ -18,6 +18,7 @@ export async function login(
       where: {
         username: {
           equals: username,
+          // set mode to insensitive to make username case insensitive
           mode: "insensitive",
         },
       },
@@ -25,7 +26,7 @@ export async function login(
 
     if (!existingUser || !existingUser.passwordHash) {
       return {
-        error: "Incorrect username or password",
+        error: "Incorrect username or password!",
       };
     }
 
@@ -55,7 +56,7 @@ export async function login(
     if (isRedirectError(error)) throw error;
     console.error(error);
     return {
-      error: "Something went wrong. Please try again.",
+      error: "Something went wrong. Please try again later!",
     };
   }
 }

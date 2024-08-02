@@ -36,9 +36,11 @@ model User {
 
   createdAt DateTime @default(now())
 
+  //name of the table in the database, remember it is plural and lowercase
   @@map("users")
 }
 
+// session from lucia auth
 model Session {
   id        String   @id
   userId    String
