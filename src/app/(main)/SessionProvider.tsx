@@ -19,6 +19,7 @@ export default function SessionProvider({
   );
 }
 
+//custom hook
 export function useSession() {
   const context = useContext(SessionContext);
   if (!context) {

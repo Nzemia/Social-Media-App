@@ -30,7 +30,7 @@ export default function UserButton({ className }: UserButtonProps) {
 
   const { theme, setTheme } = useTheme();
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   return (
     <DropdownMenu>
@@ -39,15 +39,19 @@ export default function UserButton({ className }: UserButtonProps) {
           <UserAvatar avatarUrl={user.avatarUrl} size={40} />
         </button>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent>
         <DropdownMenuLabel>Logged in as @{user.username}</DropdownMenuLabel>
+
         <DropdownMenuSeparator />
+
         <Link href={`/users/${user.username}`}>
           <DropdownMenuItem>
             <UserIcon className="mr-2 size-4" />
-            Profile
+              Profile
           </DropdownMenuItem>
         </Link>
+
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
             <Monitor className="mr-2 size-4" />
@@ -73,16 +77,21 @@ export default function UserButton({ className }: UserButtonProps) {
             </DropdownMenuSubContent>
           </DropdownMenuPortal>
         </DropdownMenuSub>
+
+
         <DropdownMenuSeparator />
+
+
         <DropdownMenuItem
           onClick={() => {
-            queryClient.clear();
+            
             logout();
           }}
         >
           <LogOutIcon className="mr-2 size-4" />
           Logout
         </DropdownMenuItem>
+
       </DropdownMenuContent>
     </DropdownMenu>
   );
