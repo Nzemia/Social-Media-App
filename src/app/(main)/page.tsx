@@ -1,5 +1,9 @@
 
 
 export default function Home() {
-    return <div className="bg-red-500">test</div>;
+    return <main className="h-[200vh] w-full bg-red-50">
+        <div className="w-full">
+            Front page
+        </div>
+    </main>
 }
