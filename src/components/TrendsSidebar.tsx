@@ -1,14 +1,13 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
-import { getUserDataSelect } from "@/lib/types";
+import {UserDataSelect } from "@/lib/types";
 import { formatNumber } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { unstable_cache } from "next/cache";
 import Link from "next/link";
 import { Suspense } from "react";
-import FollowButton from "./FollowButton";
 import UserAvatar from "./UserAvatar";
-import UserTooltip from "./UserTooltip";
+import { Button } from "./ui/button";
 
 export default function TrendsSidebar() {
   return (
@@ -31,13 +30,13 @@ async function WhoToFollow() {
       NOT: {
         id: user.id,
       },
-      followers: {
-        none: {
-          followerId: user.id,
-        },
-      },
+      // followers: {
+      //   none: {
+      //     followerId: user.id,
+      //   },
+      // },
     },
-    select: getUserDataSelect(user.id),
+    select: UserDataSelect,
     take: 5,
   });
 
@@ -46,7 +45,7 @@ async function WhoToFollow() {
       <div className="text-xl font-bold">Who to follow</div>
       {usersToFollow.map((user) => (
         <div key={user.id} className="flex items-center justify-between gap-3">
-          <UserTooltip user={user}>
+        
             <Link
               href={`/users/${user.username}`}
               className="flex items-center gap-3"
@@ -61,8 +60,9 @@ async function WhoToFollow() {
                 </p>
               </div>
             </Link>
-          </UserTooltip>
-          <FollowButton
+          
+          <Button>Follow</Button>
+          {/* <FollowButton
             userId={user.id}
             initialState={{
               followers: user._count.followers,
@@ -70,16 +70,19 @@ async function WhoToFollow() {
                 ({ followerId }) => followerId === user.id,
               ),
             }}
-          />
+          /> */}
         </div>
       ))}
     </div>
   );
 }
 
+
+// count of posts with hashtags
 const getTrendingTopics = unstable_cache(
   async () => {
     const result = await prisma.$queryRaw<{ hashtag: string; count: bigint }[]>`
+            -- Doing raw sql to count the posts with hashtags in the content 
             SELECT LOWER(unnest(regexp_matches(content, '#[[:alnum:]_]+', 'g'))) AS hashtag, COUNT(*) AS count
             FROM posts
             GROUP BY (hashtag)
@@ -93,10 +96,12 @@ const getTrendingTopics = unstable_cache(
     }));
   },
   ["trending_topics"],
+  // cached the data for 3 hours 
   {
     revalidate: 3 * 60 * 60,
   },
 );
+
 
 async function TrendingTopics() {
   const trendingTopics = await getTrendingTopics();
