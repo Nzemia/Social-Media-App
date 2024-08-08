@@ -1,6 +1,7 @@
 "use client";
 
 import InfiniteScrollContainer from "@/components/InfiniteScrollContainer";
+import DeletePostDialog from "@/components/posts/DeletePostDialog";
 import Post from "@/components/posts/Post";
 import PostsLoadingSkeleton from "@/components/posts/PostsLoadingSkeleton";
 import { Button } from "@/components/ui/button";
@@ -58,6 +59,8 @@ export default function ForYouFeed() {
 
       {/* loading for more posts...  */}
       {isFetchingNextPage && <Loader2 className="mx-auto my-4 h-8 w-8 animate-spin" />}
+
+      
 
       
     </InfiniteScrollContainer>
