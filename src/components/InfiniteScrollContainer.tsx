@@ -11,6 +11,7 @@ export default function InfiniteScrollContainer({
   className,
 }: InfiniteScrollContainerProps) {
   const { ref } = useInView({
+    // we wanna start scroll earlier before the user reaches the bottom 
     rootMargin: "200px",
     onChange(inView) {
       if (inView) {
