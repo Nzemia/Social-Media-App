@@ -6,6 +6,9 @@ interface LinkifyProps {
   children: React.ReactNode;
 }
 
+
+//used Linkify to convert links, hashtags, and usernames into links
+
 export default function Linkify({ children }: LinkifyProps) {
   return (
     <LinkifyUsername>

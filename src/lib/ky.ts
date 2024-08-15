@@ -1,6 +1,8 @@
 // check this on github :
 // https://github.com/sindresorhus/ky
 
+//with this, we can parse the date from the response automatically 
+
 import ky from "ky";
 
 const kyInstance = ky.create({
