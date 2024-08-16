@@ -17,6 +17,7 @@ interface CropImageDialogProps {
   onClose: () => void;
 }
 
+{/**I used react cropper to crop the image*/}
 export default function CropImageDialog({
   src,
   cropAspectRatio,

@@ -1,18 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  //caching in client side
   experimental: {
     staleTimes: {
       dynamic: 30,
     },
   },
   serverExternalPackages: ["@node-rs/argon2"],
-
   images: {
     remotePatterns: [
       {
-        protocol: "https",
         hostname: "utfs.io",
+        protocol: "https",
         pathname: `/a/${process.env.NEXT_PUBLIC_UPLOADTHING_APP_ID}/*`,
       },
     ],

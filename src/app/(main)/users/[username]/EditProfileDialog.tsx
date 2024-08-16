@@ -89,7 +89,7 @@ export default function EditProfileDialog({
                 : user.avatarUrl || avatarPlaceholder
             }
             onImageCropped={setCroppedAvatar}
-          />
+          /> 
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
@@ -181,7 +181,9 @@ function AvatarInput({ src, onImageCropped }: AvatarInputProps) {
           height={150}
           className="size-32 flex-none rounded-full object-cover"
         />
-        <span className="absolute inset-0 m-auto flex size-12 items-center justify-center rounded-full bg-black bg-opacity-30 text-white transition-colors duration-200 group-hover:bg-opacity-25">
+        <span className="absolute inset-0 m-auto flex size-12 items-center justify-center rounded-full 
+          bg-black bg-opacity-30 text-white transition-colors duration-200 group-hover:bg-opacity-25"
+        >
           <Camera size={24} />
         </span>
       </button>

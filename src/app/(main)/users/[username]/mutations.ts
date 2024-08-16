@@ -1,6 +1,6 @@
 import { useToast } from "@/components/ui/use-toast";
 import { PostsPage } from "@/lib/types";
-// import { useUploadThing } from "@/lib/uploadthing";
+import { useUploadThing } from "@/lib/uploadthing";
 import { UpdateUserProfileValues } from "@/lib/validation";
 import {
   InfiniteData,
@@ -18,7 +18,7 @@ export function useUpdateProfileMutation() {
 
   const queryClient = useQueryClient();
 
-  // const { startUpload: startAvatarUpload } = useUploadThing("avatar");
+  const { startUpload: startAvatarUpload } = useUploadThing("avatar");
 
   const mutation = useMutation({
     mutationFn: async ({
@@ -71,7 +71,7 @@ export function useUpdateProfileMutation() {
       router.refresh();
 
       toast({
-        description: "Profile updated",
+        description: "Profile updated!",
       });
     },
     onError(error) {
