@@ -30,6 +30,7 @@ export default function PostEditor() {
     reset: resetMediaUploads,
   } = useMediaUpload();
 
+  {/**Drag and drop */}
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop: startUpload,
   });
@@ -68,6 +69,7 @@ export default function PostEditor() {
     );
   }
 
+  {/**pasting files */}
   function onPaste(e: ClipboardEvent<HTMLInputElement>) {
     const files = Array.from(e.clipboardData.items)
       .filter((item) => item.kind === "file")
