@@ -18,6 +18,8 @@ interface PageProps {
   params: { username: string };
 }
 
+
+{/**Displaying user data , ie, name */}
 const getUser = cache(async (username: string, loggedInUserId: string) => {
   const user = await prisma.user.findFirst({
     where: {
