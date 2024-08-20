@@ -11,6 +11,7 @@ import UserTooltip from "../UserTooltip";
 import { Media } from "@prisma/client";
 import Image from "next/image";
 import { MessageSquare } from "lucide-react";
+import LikeButton from "./LikeButton";
 
 interface PostProps {
   post: PostData;
@@ -45,6 +46,7 @@ export default function Post({ post }: PostProps) {
             <Link
               href={`/posts/${post.id}`}
               className="block text-sm text-muted-foreground hover:underline"
+              suppressHydrationWarning
             >
               {formatRelativeDate(post.createdAt)}
             </Link>
@@ -63,9 +65,18 @@ export default function Post({ post }: PostProps) {
       <Linkify>
         <div className="whitespace-pre-line break-words">{post.content}</div>
       </Linkify>
+
+      {/** If there are media attachments, display them */}
       {!!post.attachments.length && (
         <MediaPreviews attachments={post.attachments} />
       )}
+
+      {/**Likes */}
+      <hr className="text-muted-foreground my-3" />
+      <LikeButton postId={post.id} initialState={{
+        likes: post._count.likes,
+        isLikedByUser: post.likes.some((like) => like.userId === user.id),
+      }} />
     </article>
   );
 }
