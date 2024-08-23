@@ -12,6 +12,7 @@ import { Media } from "@prisma/client";
 import Image from "next/image";
 import { MessageSquare } from "lucide-react";
 import LikeButton from "./LikeButton";
+import BookmarkButton from "./BookmarkButton";
 
 interface PostProps {
   post: PostData;
@@ -72,11 +73,25 @@ export default function Post({ post }: PostProps) {
       )}
 
       {/**Likes */}
-      <hr className="text-muted-foreground my-3" />
-      <LikeButton postId={post.id} initialState={{
-        likes: post._count.likes,
-        isLikedByUser: post.likes.some((like) => like.userId === user.id),
-      }} />
+      <hr className="my-3 text-muted-foreground" />
+      <div className="flex justify-between gap-5">
+        <LikeButton
+          postId={post.id}
+          initialState={{
+            likes: post._count.likes,
+            isLikedByUser: post.likes.some((like) => like.userId === user.id),
+          }}
+        />
+        {/**Bookmarks */}
+        <BookmarkButton
+          postId={post.id}
+          initialState={{
+            isBookmarkedByUser: post.bookmarks.some(
+              (bookmark) => bookmark.userId === user.id,
+            ),
+          }}
+        />
+      </div>
     </article>
   );
 }
